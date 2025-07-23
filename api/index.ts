@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import apiRouter from "./routes/api.js";
 import { handle } from "hono/vercel";
-import { serve } from "@hono/node-server";
 
 const app = new Hono().basePath("/api");
 
@@ -26,13 +25,3 @@ export const config = {
 };
 
 export default handle(app);
-
-serve(
-  {
-    fetch: app.fetch,
-    port: 3000,
-  },
-  (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
-  }
-);
